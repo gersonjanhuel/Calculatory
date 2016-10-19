@@ -37,6 +37,10 @@ class ViewController: UIViewController {
     var numStack: [Double] = [] // tampung bilangan
     var opStack: [String] = [] // tampung operator
     
+    
+    var last_numStack:Double = 0
+    var last_opStack:String = ""
+    
     var numberIsActive = true
     var operatorIsActive = true
     
@@ -56,6 +60,8 @@ class ViewController: UIViewController {
     }
     
     func calculate(newOp: String) {
+        last_opStack = newOp
+        
         if(operatorIsActive==true) {
             opStack.removeLast()
         }
@@ -63,8 +69,8 @@ class ViewController: UIViewController {
         if tempResultDisplay != "" && !numStack.isEmpty {
             let stackOp = opStack.last
             if !((stackOp == "+" || stackOp == "-") && (newOp == "*" || newOp == "/")) {
-                let oper = ops[opStack.removeLast()]
-                tempResult = oper!(numStack.removeLast(), tempResult)
+                //let oper = ops[opStack.removeLast()]
+                //tempResult = oper!(numStack.removeLast(), tempResult)
                 doEqual()
             }
         }
@@ -77,9 +83,16 @@ class ViewController: UIViewController {
         operatorIsActive = true
         numberIsActive = false
         
+        
+        
     }
     
     func doEqual() {
+        
+        print("last_opStack "+last_opStack)
+        print("last_numStack \(last_numStack)")
+        
+        
         isEqualBtnPressed = true
         if !numStack.isEmpty {
             let oper = ops[opStack.removeLast()]
@@ -87,7 +100,14 @@ class ViewController: UIViewController {
             if !opStack.isEmpty {
                 doEqual()
             }
+        } else if(last_opStack != "") {
+            let oper = ops[last_opStack]
+            print("masuk last opstack \(tempResult)")
+            tempResult = oper!(tempResult, last_numStack)
+            
         }
+        print("setelah lewat doEqual \(tempResult)")
+        
         showResult()
         tempResultDisplay = ""
         isScreenFull = false
@@ -172,6 +192,9 @@ class ViewController: UIViewController {
                         resultLabel.text = tempResultDisplay
                     }
                 }
+                
+                last_numStack = tempResult
+                
             } else if str == "0" {
                 tempResultDisplay += str
                 tempResult = Double((tempResultDisplay as NSString).doubleValue)
@@ -182,16 +205,21 @@ class ViewController: UIViewController {
                     if (tempResult == 0)  {
                         tempResultDisplay = ""
                     }
+                    last_numStack = tempResult
                     showResult()
                 }
                 
             } else {
+                
+                
                 tempResultDisplay += str
                 print("tempResultDisplay "+tempResultDisplay)
                 tempResult = Double((tempResultDisplay as NSString).doubleValue)
                 
+                last_numStack = tempResult
                 showResult()
                 print("tempResult \(tempResult)")
+                
                 
             }
         }
@@ -272,6 +300,9 @@ class ViewController: UIViewController {
         
         numStack.removeAll()
         opStack.removeAll()
+        
+        last_opStack = ""
+        last_numStack = 0
         
         btnAC.setTitle("AC", for: .normal)
     }
