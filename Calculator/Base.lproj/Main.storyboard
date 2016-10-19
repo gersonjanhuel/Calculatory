@@ -260,14 +260,12 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="btn1" destination="Ysy-yn-FHj" id="IrF-zY-RLU"/>
                         <outlet property="btnAC" destination="KQV-am-jiu" id="CBS-gn-gk8"/>
                         <outlet property="btnOp1" destination="LZB-37-5Fe" id="n0A-0a-2tJ"/>
                         <outlet property="btnOp2" destination="i9o-SL-ogX" id="VnX-Wu-3yy"/>
                         <outlet property="btnOp3" destination="GML-li-eee" id="4pf-jC-hiQ"/>
                         <outlet property="btnOp4" destination="A9R-Aw-as3" id="yqO-a9-Mxp"/>
                         <outlet property="resultLabel" destination="f3z-HA-yUr" id="rNi-kw-IzG"/>
-                        <outlet property="test" destination="eWm-r5-f7U" id="nZk-Qo-n84"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
