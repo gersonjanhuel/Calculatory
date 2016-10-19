@@ -56,6 +56,10 @@ class ViewController: UIViewController {
     }
     
     func calculate(newOp: String) {
+        if(operatorIsActive==true) {
+            opStack.removeLast()
+        }
+        
         if tempResultDisplay != "" && !numStack.isEmpty {
             let stackOp = opStack.last
             if !((stackOp == "+" || stackOp == "-") && (newOp == "*" || newOp == "/")) {
@@ -69,6 +73,9 @@ class ViewController: UIViewController {
         tempResultDisplay = ""
         showResult()
         isScreenFull = false
+        
+        operatorIsActive = true
+        numberIsActive = false
         
     }
     
@@ -192,6 +199,9 @@ class ViewController: UIViewController {
         if(tempResultDisplay.characters.count >= 9) {
             isScreenFull = true
         }
+        
+        operatorIsActive = false
+        numberIsActive = true
     }
     
     func formatDecimal(tempNumber:Double) -> String {
@@ -279,6 +289,8 @@ class ViewController: UIViewController {
         sender.layer.borderColor = UIColor.black.cgColor
         
         calculate(newOp: ops_symbol[sender.tag])
+        
+        
     }
     
     @IBAction func resultBtnPressed(_ sender: AnyObject) {
