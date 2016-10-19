@@ -23,12 +23,6 @@ class ViewController: UIViewController {
     @IBOutlet weak var btnOp2: UIButton!
     @IBOutlet weak var btnOp1: UIButton!
     @IBOutlet weak var btnAC: UIButton!
-    @IBOutlet weak var btn1: UIButton!
-    
-    
-    
-    @IBOutlet weak var test: UIButton!
-    
     
     var isScreenFull:Bool = false
     var isEqualBtnPressed: Bool = false
